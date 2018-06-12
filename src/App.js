@@ -31,12 +31,24 @@ class App extends Component {
   constructor(props) {
     // Sets this.props in constructor
     super(props);
-    // Set initial state (can be accessed in whole component)
+    // Set initial state 
     this.state = {
       list,
       welcome,
       answer,
     };
+
+    // bind this method to constructor
+    this.onDismiss = this.onDismiss.bind(this);
+  }
+
+  onDismiss(id) {
+    const isNotId = item => item.objectID !==id;
+    
+    const updatedList = this.state.list.filter(isNotId);
+
+    // update state
+    this.setState({ list: updatedList });
   }
 
   render() {  
@@ -45,7 +57,6 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">My React Page</h1>
-          {console.log('Hi')}
         </header>
 
         <h2>{this.state.welcome}</h2>
@@ -58,6 +69,9 @@ class App extends Component {
               <span>Author: {item.author} </span>
               <span>Comments: {item.num_comments} </span>
               <span>Points: {item.points} </span>
+              <span>
+                <button onClick={() => this.onDismiss(item.objectID)} type="button">Dismiss</button>
+              </span>
             </div>
         )}
       </div>
