@@ -39,9 +39,11 @@ class App extends Component {
     };
 
     // bind this method to constructor
+    // Class method dont automatically bind this to class instance
     this.onDismiss = this.onDismiss.bind(this);
   }
 
+  // Business logic should be outside constructor
   onDismiss(id) {
     const isNotId = item => item.objectID !==id;
     
