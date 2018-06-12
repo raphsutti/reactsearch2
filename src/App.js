@@ -39,16 +39,14 @@ class App extends Component {
         <p>The answer to everything is {answer}</p>
         
         <h3>The list:</h3>
-        {list.map(function(item) {
-          return (
+        {list.map(item => 
             <div key={item.objectID}>
               <span><a href={item.url}>{item.title}</a> </span>
               <span>Author: {item.author} </span>
               <span>Comments: {item.num_comments} </span>
               <span>Points: {item.points} </span>
             </div>
-          );
-        })}
+        )}
       </div>
     );
   }
