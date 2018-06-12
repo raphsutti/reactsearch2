@@ -33,9 +33,9 @@ class App extends Component {
     super(props);
     // Set initial state (can be accessed in whole component)
     this.state = {
-      list: list,
-      welcome: welcome,
-      answer: answer,
+      list,
+      welcome,
+      answer,
     };
   }
 
