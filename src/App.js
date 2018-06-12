@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+// Create mock API array
 const list = [
   {
     title: 'React',
@@ -21,12 +22,24 @@ const list = [
   },
 ];
 
-const helloWorld = 'Welcome to the Road to learn React practice by Raph Sutti 2018';
+// Test const
+const welcome = 'Welcome to the Road to learn React practice by Raph Sutti 2018';
 const answer = 42;
 
 class App extends Component {
-  render() {
-    
+  // Called when component initialised
+  constructor(props) {
+    // Sets this.props in constructor
+    super(props);
+    // Set initial state (can be accessed in whole component)
+    this.state = {
+      list: list,
+      welcome: welcome,
+      answer: answer,
+    };
+  }
+
+  render() {  
     return (
       <div className="App">
         <header className="App-header">
@@ -35,11 +48,11 @@ class App extends Component {
           {console.log('Hi')}
         </header>
 
-        <h2>{helloWorld}</h2>
-        <p>The answer to everything is {answer}</p>
+        <h2>{this.state.welcome}</h2>
+        <p>The answer to everything is {this.state.answer}</p>
         
         <h3>The list:</h3>
-        {list.map(item => 
+        {this.state.list.map(item => 
             <div key={item.objectID}>
               <span><a href={item.url}>{item.title}</a> </span>
               <span>Author: {item.author} </span>
