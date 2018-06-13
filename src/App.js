@@ -67,6 +67,7 @@ class App extends Component {
   }
 
   render() {  
+    const { welcome, answer, searchTerm, list } = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -74,14 +75,14 @@ class App extends Component {
           <h1 className="App-title">My React Page</h1>
         </header>
 
-        <h2>{this.state.welcome}</h2>
-        <p>The answer to everything is {this.state.answer}</p>
+        <h2>{welcome}</h2>
+        <p>The answer to everything is {answer}</p>
         
         <form>
           <input type="text" onChange={this.onSearchChange} />
         </form>
         <h3>The list:</h3>
-        {this.state.list.filter(isSearched(this.state.searchTerm)).map(item => 
+        {list.filter(isSearched(searchTerm)).map(item => 
             <div key={item.objectID}>
               <span><a href={item.url}>{item.title}</a> </span>
               <span>Author: {item.author} </span>
