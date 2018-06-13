@@ -26,6 +26,13 @@ const list = [
 const welcome = 'Welcome to the Road to learn React practice by Raph Sutti 2018';
 const answer = 42;
 
+// function isSearched(searchTerm) {
+//   return function(item) {
+//     return item.title.toLowerCase().includes(searchTerm.toLowerCase());
+//   }
+// }
+const isSearched = searchTerm => item => item.title.toLowerCase().includes(searchTerm.toLowerCase());
+
 class App extends Component {
   // Called when component initialised
   constructor(props) {
@@ -36,14 +43,20 @@ class App extends Component {
       list,
       welcome,
       answer,
+      searchTerm: '',       
     };
 
     // bind this method to constructor
     // Class method dont automatically bind this to class instance
+    this.onSearchChange = this.onSearchChange.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
   }
 
   // Business logic should be outside constructor
+  onSearchChange(event) {
+    this.setState({ searchTerm: event.target.value });
+  }
+
   onDismiss(id) {
     const isNotId = item => item.objectID !==id;
     
@@ -64,8 +77,11 @@ class App extends Component {
         <h2>{this.state.welcome}</h2>
         <p>The answer to everything is {this.state.answer}</p>
         
+        <form>
+          <input type="text" onChange={this.onSearchChange} />
+        </form>
         <h3>The list:</h3>
-        {this.state.list.map(item => 
+        {this.state.list.filter(isSearched(this.state.searchTerm)).map(item => 
             <div key={item.objectID}>
               <span><a href={item.url}>{item.title}</a> </span>
               <span>Author: {item.author} </span>
