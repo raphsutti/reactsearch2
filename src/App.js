@@ -20,6 +20,22 @@ const list = [
     points: 5,
     objectID: 1,
   },
+  {
+    title: 'JSX',
+    url: 'https://github.com/reactjs/redux',
+    author: 'Some Dude',
+    num_comments: 2,
+    points: 5,
+    objectID: 2,
+  },
+  {
+    title: 'Ruby',
+    url: 'https://github.com/reactjs/redux',
+    author: 'Matz',
+    num_comments: 2,
+    points: 5,
+    objectID: 3,
+  },
 ];
 
 // Test const
@@ -69,7 +85,7 @@ class App extends Component {
   render() {  
     const { welcome, answer, searchTerm, list } = this.state;
     return (
-      <div className="App">
+      <div className="App page">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">My React Page</h1>
@@ -78,13 +94,14 @@ class App extends Component {
         <h2>{welcome}</h2>
         <p>The answer to everything is {answer}</p>
         
-        <Search 
-          value={searchTerm}
-          onChange={this.onSearchChange}
-        >
-          Search:
-        </Search>
-
+        <div className="interactions">
+          <Search 
+            value={searchTerm}
+            onChange={this.onSearchChange}
+          >
+            Search:
+          </Search>
+        </div>
         <Table 
           list={list}
           pattern={searchTerm}
@@ -102,16 +119,15 @@ const Search = ({ value, onChange, children }) =>
   </form>
 
 const Table = ({ list, pattern, onDismiss }) =>
-  <div>
-    <h3>The list:</h3>
+  <div className="table">
     {list.filter(isSearched(pattern)).map(item => 
-      <div key={item.objectID}>
-        <span><a href={item.url}>{item.title}</a> </span>
-        <span>Author: {item.author} </span>
-        <span>Comments: {item.num_comments} </span>
-        <span>Points: {item.points} </span>
-        <span>
-          <Button onClick={() => onDismiss(item.objectID)}>Dismiss</Button>
+      <div key={item.objectID} className="table-row">
+        <span style={{ width: '40%' }}><a href={item.url}>{item.title}</a> </span>
+        <span style={{ width: '30%' }}>{item.author} </span>
+        <span style={{ width: '10%' }}> {item.num_comments} </span>
+        <span style={{ width: '10%' }}>{item.points} </span>
+        <span style={{ width: '20%' }}>
+          <Button onClick={() => onDismiss(item.objectID)} className="button-inline">Dismiss</Button>
         </span>
       </div>
     )}
