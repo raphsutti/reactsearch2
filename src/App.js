@@ -79,7 +79,7 @@ class App extends Component {
         <p>The answer to everything is {answer}</p>
         
         <form>
-          <input type="text" onChange={this.onSearchChange} />
+          <input type="text" value={searchTerm} onChange={this.onSearchChange} />
         </form>
         <h3>The list:</h3>
         {list.filter(isSearched(searchTerm)).map(item => 
